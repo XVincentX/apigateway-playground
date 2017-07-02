@@ -4,6 +4,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
+  console.log("s2 hit");
   res.json({
     invoiceId: "10",
     amount: 3000

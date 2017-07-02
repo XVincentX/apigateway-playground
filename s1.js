@@ -4,6 +4,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
+  console.log("s2 hit");
   res.json({
     name: "Vincenzo",
     surname: "Chianese"
