@@ -37,10 +37,6 @@ services:
   kong:
     image: kong:latest
     restart: always
-    links:
-      - kong-database:kong-database
-      - customers:customers
-      - invoices:invoices
     expose:
       - 8000
       - 8443
