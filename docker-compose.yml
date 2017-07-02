@@ -1,0 +1,52 @@
+version: '3'
+services:
+
+  customers:
+    image: mhart/alpine-node
+    container_name: customers
+    expose:
+      - 3000
+    command: node ./s1.js
+    entrypoint: node ./s1.js
+    volumes:
+      - ./:/usr/src
+    working_dir: /usr/src
+
+  invoices:
+    image: mhart/alpine-node
+    container_name: invoices
+    expose:
+      - 3000
+    command: node ./s2.js
+    entrypoint: node ./s2.js
+    volumes:
+      - ./:/usr/src
+    working_dir: /usr/src
+
+  kong-database:
+    image: postgres:9.4
+    container_name: kong-database
+    environment:
+      - POSTGRES_USER=kong
+      - POSTGRES_DB=kong
+
+  kong:
+    image: kong:latest
+    restart: always
+    links:
+      - kong-database:kong-database
+      - customers:customers
+      - invoices:invoices
+    expose:
+      - 8000
+      - 8443
+      - 8001
+      - 7946
+    ports:
+      - 8000
+      - 8443
+      - 8001
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+    command: ["kong", "start", "--vv"]
