@@ -6,6 +6,8 @@ services:
     container_name: customers
     expose:
       - 3000
+    ports:
+      - "3001:3000"
     command: node ./s1.js
     entrypoint: node ./s1.js
     volumes:
@@ -17,6 +19,8 @@ services:
     container_name: invoices
     expose:
       - 3000
+    ports:
+      - "3002:3000"
     command: node ./s2.js
     entrypoint: node ./s2.js
     volumes:
@@ -49,4 +53,3 @@ services:
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-    command: ["kong", "start", "--vv"]
