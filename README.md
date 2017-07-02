@@ -5,3 +5,22 @@ running on 2 different places in the world.
 
 [Kong](https://getkong.org) is then used as a glue to serve the thing from a single endpoint and
 routing to the right API.
+
+## Installation
+
+1. Start all the containers
+
+`docker-compose up`
+
+2. Verify Kong API is up
+
+`curl http://localhost:8001/`
+
+3. Create two APIs:
+
+```bash
+curl -i -X POST http://localhost:8001/apis --data "name=customers" --data "uris=/customers" --data "upstream_url=http://customers:3000"
+curl -i -X POST http://localhost:8001/apis --data "name=invoices" --data "uris=/invoices" --data "upstream_url=http://invoices:3000"
+```
+
+4. Have fun.
