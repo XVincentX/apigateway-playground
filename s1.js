@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 
-app.get('/customer', (req, res) => {
+app.get('/', (req, res) => {
   res.json({
     name: "Vincenzo",
     surname: "Chianese"

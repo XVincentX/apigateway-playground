@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 
-app.get('/invoices', (req, res) => {
+app.get('/', (req, res) => {
   res.json({
     invoiceId: "10",
     amount: 3000
