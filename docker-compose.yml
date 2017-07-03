@@ -3,7 +3,6 @@ services:
 
   customers:
     image: mhart/alpine-node
-    container_name: customers
     expose:
       - 3000
     command: node ./s1.js
@@ -14,7 +13,6 @@ services:
 
   invoices:
     image: mhart/alpine-node
-    container_name: invoices
     expose:
       - 3000
     command: node ./s2.js
@@ -23,9 +21,11 @@ services:
       - ./:/usr/src
     working_dir: /usr/src
 
+  mongo:
+    image: mongo
+
   kong-database:
     image: postgres:9.4
-    container_name: kong-database
     environment:
       - POSTGRES_USER=kong
       - POSTGRES_DB=kong
