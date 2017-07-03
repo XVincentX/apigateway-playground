@@ -53,6 +53,11 @@ services:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
 
+  konga:
+    image: pgbi/kong-dashboard:v2
+    ports:
+      - 8080:8080
+
 volumes:
   mongo-data:
   postgres-data:
