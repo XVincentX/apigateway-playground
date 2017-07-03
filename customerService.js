@@ -1,4 +1,6 @@
 const express = require("express");
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
 
 const app = express();
 
@@ -14,4 +16,9 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(3000, () => { console.log("Ready to go!"); });
+mongoose.createConnection("mongodb://mongo/application", { useMongoClient: true })
+  .then(() => {
+    app.listen(3000, () => { console.log("Application is ready to go!"); });
+  }).catch((err) => {
+    console.error(`Error during database connection: ${err}`);
+  });
