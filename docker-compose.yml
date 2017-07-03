@@ -3,16 +3,16 @@ services:
 
   customers:
     build: .
-    command: node ./s1.js
-    entrypoint: node ./s1.js
+    command: node ./customerService.js
+    entrypoint: node ./customerService.js
     volumes:
       - ./:/usr/src
       - /usr/src/node_modules
 
   invoices:
     build: .
-    command: node ./s2.js
-    entrypoint: node ./s2.js
+    command: node ./invoiceService.js
+    entrypoint: node ./invoiceService.js
     volumes:
       - ./:/usr/src
       - /usr/src/node_modules
