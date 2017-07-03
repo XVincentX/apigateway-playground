@@ -2,24 +2,20 @@ version: '3'
 services:
 
   customers:
-    image: mhart/alpine-node
-    expose:
-      - 3000
+    build: .
     command: node ./s1.js
     entrypoint: node ./s1.js
     volumes:
       - ./:/usr/src
-    working_dir: /usr/src
+      - /usr/src/node_modules
 
   invoices:
-    image: mhart/alpine-node
-    expose:
-      - 3000
+    build: .
     command: node ./s2.js
     entrypoint: node ./s2.js
     volumes:
       - ./:/usr/src
-    working_dir: /usr/src
+      - /usr/src/node_modules
 
   mongo:
     image: mongo
