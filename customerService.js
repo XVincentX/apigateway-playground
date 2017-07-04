@@ -2,16 +2,30 @@ const express = require("express");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-const app = express();
-
-app.get('/status', (req, res) => {
-  res.sendStatus(204);
+const Customer = mongoose.model('customer', {
+  name: String,
+  surname: String
 });
 
-app.get('/', (req, res) => {
-  res.json({
-    name: "Vincenzo",
-    surname: "Chianese"
+const Invoice = mongoose.model('invoice', {
+  date: Date,
+  amount: Number,
+  customer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'customer' }]
+});
+
+const app = express();
+
+app.get('/customers/:id', (req, res) => {
+  let query = {};
+
+  if (req.query.id)
+    query._id = req.query.id;
+
+  Customer.find(query).lean()
+    .then((customers) =>
+      res.json(customers);
+    ).catch((err) => {
+    res.status(500).send(err);
   });
 });
 
