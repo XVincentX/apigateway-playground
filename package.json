@@ -1,7 +1,11 @@
 {
   "name": "kong_node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Useless application",
+  "repository": {
+    "url": "https://github.com/XVincentX/kong-node",
+    "type": "git"
+  },
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -10,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "mongoose": "^4.11.1",
     "nodemon": "^1.11.0"
