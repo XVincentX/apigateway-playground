@@ -2,6 +2,7 @@ version: '3'
 services:
 
   customers:
+    container_name: customers
     build: .
     command: npm start
     volumes:
@@ -9,6 +10,7 @@ services:
       - /usr/src/node_modules
 
   invoices:
+    container_name: invoices
     build: .
     command: npm start
     volumes:
@@ -16,11 +18,13 @@ services:
       - /usr/src/node_modules
 
   mongo:
+    container_name: mongo
     image: mongo
     volumes:
       - mongo-data:/data/db
 
   kong-database:
+    container_name: postgres
     image: postgres:9.4
     environment:
       - POSTGRES_USER=kong
@@ -29,6 +33,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   kong:
+    container_name: kong
     build: ./kong/
     restart: always
     ports:
@@ -40,6 +45,7 @@ services:
       - KONG_PG_HOST=kong-database
 
   konga:
+    container_name: konga
     image: pgbi/kong-dashboard:v2
     ports:
       - 8080:8080
