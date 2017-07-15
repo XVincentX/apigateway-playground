@@ -32,13 +32,12 @@ services:
     build: ./kong/
     restart: always
     ports:
-      - 8000:8000
-      - 8443:8443
+      - 80:80
+      - 443:443
       - 8001:8001
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
-      - KONG_CUSTOM_PLUGINS=external-oauth
 
   konga:
     image: pgbi/kong-dashboard:v2
