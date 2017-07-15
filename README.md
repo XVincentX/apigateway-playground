@@ -10,7 +10,7 @@ routing to the right API.
 
 1. Start all the containers
 
-`docker-compose up`
+`docker-compose up -d`
 
 2. Verify Kong API is up
 
@@ -24,3 +24,5 @@ curl -i -X POST http://localhost:8001/apis --data "name=invoices" --data "uris=/
 ```
 
 4. Have fun.
+
+You can eventually interact with Kong using the web interface. It will be listening on the 8080 port.
