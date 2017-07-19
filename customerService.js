@@ -26,8 +26,8 @@ app.get('/customers/:id?', (req, res) => {
 
   Customer.find(query).lean()
     .then(
-      (customers) => res.json(customers),
-      (err) => res.status(500).send(err));
+    (customers) => res.json(customers),
+    (err) => res.status(500).send(err));
 });
 
 app.post('/customers/', (req, res) => {
@@ -37,6 +37,6 @@ app.post('/customers/', (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-mongoose.createConnection("mongodb://mongo/application", { useMongoClient: true })
+mongoose.connect("mongodb://mongo/application", { useMongoClient: true })
   .then(() => app.listen(3000, () => { console.log("Application is ready to go!") }),
-    (err) => console.error(`Error during database connection: ${err}`));
+  (err) => console.error(`Error during database connection: ${err}`));
