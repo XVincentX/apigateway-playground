@@ -8,6 +8,8 @@ services:
     volumes:
       - ./customerService.js:/usr/src/index.js
       - /usr/src/node_modules
+    ports:
+      - 9229:9229
 
   invoices:
     container_name: invoices
@@ -16,6 +18,8 @@ services:
     volumes:
       - ./invoiceService.js:/usr/src/index.js
       - /usr/src/node_modules
+    ports:
+      - 9228:9229
 
   mongo:
     container_name: mongo
