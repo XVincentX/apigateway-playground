@@ -4,9 +4,9 @@ services:
   customers:
     container_name: customers
     build: .
-    command: npm start
+    command: ./node_modules/.bin/nodemon -- --inspect=0.0.0.0 customerService.js
     volumes:
-      - ./customerService.js:/usr/src/index.js
+      - ./customerService.js:/usr/src/customerService.js
       - /usr/src/node_modules
     ports:
       - 9229:9229
@@ -14,9 +14,9 @@ services:
   invoices:
     container_name: invoices
     build: .
-    command: npm start
+    command: ./node_modules/.bin/nodemon -- --inspect=0.0.0.0 invoiceService.js
     volumes:
-      - ./invoiceService.js:/usr/src/index.js
+      - ./invoiceService.js:/usr/src/invoiceService.js
       - /usr/src/node_modules
     ports:
       - 9228:9229
