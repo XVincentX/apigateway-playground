@@ -10,12 +10,6 @@ const Customer = mongoose.model('customers', {
   surname: String
 });
 
-const Invoice = mongoose.model('invoices', {
-  date: Date,
-  amount: Number,
-  customer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'customer' }]
-});
-
 const app = express();
 
 const checkRole = (roleType) => {
@@ -44,7 +38,7 @@ app.use(apikey(function (key, next) {
 
 app.use(bodyParser.json());
 
-app.get('/customers/:id?', checkRole('user'), (req, res) => {
+app.get('/:id?', checkRole('user'), (req, res) => {
   let query = {};
 
   if (req.params.id)
@@ -56,7 +50,7 @@ app.get('/customers/:id?', checkRole('user'), (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.post('/customers/', checkRole('admin'), (req, res) => {
+app.post('/', checkRole('admin'), (req, res) => {
   (new Customer(req.body))
     .save()
     .then(
