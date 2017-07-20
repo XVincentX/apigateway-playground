@@ -23,6 +23,13 @@ curl -i -X POST http://localhost:8001/apis --data "name=customers" --data "uris=
 curl -i -X POST http://localhost:8001/apis --data "name=invoices" --data "uris=/invoices" --data "upstream_url=http://invoices:3000"
 ```
 
-4. Have fun.
+4. Insert some fixtures
+
+```bash
+curl -X POST http://customers.apitest.lan/customers -H "Content-Type: application/json" -d '{"name":"Porcesco", "surname":"Gerbone"}'
+curl -X POST http://customers.apitest.lan/customers -H "Content-Type: application/json" -d '{"name":"Vincenzo", "surname":"Chianese"}'
+```
+
+5. Have fun.
 
 You can eventually interact with Kong using the web interface. It will be listening on the 8080 port.
