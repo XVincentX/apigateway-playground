@@ -1,12 +1,17 @@
-# Kong - Node playground
+# Kong and Hypermedia
 
-This repo is simply a set of 2 NodeJS applications that are exposing a single endpoint, potentially
-running on 2 different places in the world.
+This repository is simply a set of 2 NodeJS applications that are exposing two services:
+**Customers** and **Invoices**
 
-[Kong](https://getkong.org) is then used as a glue to serve the thing from a single endpoint and
-routing to the right API.
+The idea is to show the audience how **REST** and a good **API Gateway** are perfect tools to make
+your APIs really resilient and ready to change.
+
+[Kong](https://getkong.org) is the API Gateway choosen here; basically because it's open source
+and really spread among the community; however any other else will do the job.
 
 ## Installation
+
+[Docker](https://docker.com) is used as a way to simulate different network topologies.
 
 1. Start all the containers
 
