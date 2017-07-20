@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const apikey = require("apikey");
+
 mongoose.Promise = global.Promise;
 
 const Customer = mongoose.model('customers', {
@@ -15,6 +17,15 @@ const Invoice = mongoose.model('invoices', {
 });
 
 const app = express();
+
+app.use(apikey(function (key, next) {
+  // return next(null, {});
+
+  if (key === "adminKey")
+    return next(null, { name: "admin" })
+  else if (key === "userKey")
+    return next(null, { name: "user" })
+}));
 
 app.use(bodyParser.json());
 
