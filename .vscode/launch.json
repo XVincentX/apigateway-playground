@@ -7,8 +7,19 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "Attach",
+      "name": "Attach to customers",
       "port": 9229,
+      "address": "localhost",
+      "restart": true,
+      "sourceMaps": false,
+      "localRoot": "${workspaceRoot}",
+      "remoteRoot": "/usr/src"
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach to invoices",
+      "port": 9228,
       "address": "localhost",
       "restart": true,
       "sourceMaps": false,
