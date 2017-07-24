@@ -58,6 +58,12 @@ services:
       - 81:8080
       - 9876:9876
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+
   konga:
     container_name: konga
     image: pgbi/kong-dashboard:v2
@@ -67,3 +73,4 @@ services:
 volumes:
   mongo-data:
   postgres-data:
+  redis-data:

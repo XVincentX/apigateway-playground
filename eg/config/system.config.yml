@@ -1,7 +1,8 @@
 # Core
 db:
   redis:
-    emulate: true
+    host: redis
+    port: 6379
     namespace: EG
 crypto:
   cipherKey: sensitiveKey
