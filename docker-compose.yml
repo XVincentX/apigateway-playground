@@ -48,6 +48,16 @@ services:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
 
+  eg:
+    container_name: eg
+    build: ./eg
+    command: npm start
+    volumes:
+      - /usr/src/node_modules
+    ports:
+      - 81:8080
+      - 9876:9876
+
   konga:
     container_name: konga
     image: pgbi/kong-dashboard:v2
