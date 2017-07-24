@@ -47,6 +47,8 @@ services:
     environment:
       - KONG_DATABASE=postgres
       - KONG_PG_HOST=kong-database
+    volumes:
+      - ./kong/kong.conf:/etc/kong/kong.conf
 
   eg:
     container_name: eg
@@ -54,6 +56,7 @@ services:
     command: npm start
     volumes:
       - /usr/src/node_modules
+      - ./eg/config:/usr/src/config
     ports:
       - 81:8080
       - 9876:9876
