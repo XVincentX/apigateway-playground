@@ -10,8 +10,8 @@
   "scripts": {
     "start": "nodemon -- --inspect=0.0.0.0 index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "kong:dump": "kongfig dump --host localhost:8001 > config.yml",
-    "kong:apply": "kongfig apply --path config.yml --host localhost:8001"
+    "kong:dump": "kongfig dump --host localhost:8001 > ./kong/config.yml",
+    "kong:apply": "kongfig apply --path ./kong/config.yml --host localhost:8001"
   },
   "author": "",
   "license": "ISC",

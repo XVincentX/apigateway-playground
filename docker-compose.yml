@@ -58,7 +58,7 @@ services:
       - /usr/src/node_modules
       - ./eg/config:/usr/src/config
     ports:
-      - 81:8080
+      - 81:80
       - 9876:9876
 
   redis:
