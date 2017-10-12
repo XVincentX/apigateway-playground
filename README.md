@@ -1,4 +1,4 @@
-# Kong and Hypermedia
+# API Gateway and Hypermedia
 
 This repository is simply a set of 2 NodeJS applications that are exposing two services:
 **Customers** and **Invoices**
@@ -8,6 +8,9 @@ your APIs really resilient and ready to change.
 
 [Kong](https://getkong.org) is the API Gateway choosen here; basically because it's open source
 and really spread among the community; however any other else will do the job.
+
+[Express-Gateway](https://express-gateway.io) is another API Gateway employed to do the same job.
+Still, any gateway will do the job.
 
 ## Installation
 
