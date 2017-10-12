@@ -18,10 +18,10 @@
   "dependencies": {
     "apikey": "^0.1.2",
     "axios": "^0.16.2",
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
     "kongfig": "^1.3.0",
-    "mongoose": "^4.11.3",
-    "nodemon": "^1.11.0"
+    "mongoose": "^4.12.1",
+    "nodemon": "^1.12.1"
   }
 }
