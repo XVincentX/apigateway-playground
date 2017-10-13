@@ -1,5 +1,5 @@
 {
-  "name": "kong_node",
+  "name": "gateway_node",
   "version": "1.0.0",
   "description": "Useless application",
   "repository": {
@@ -8,10 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -- --inspect=0.0.0.0 index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "kong:dump": "kongfig dump --host localhost:8001 > ./kong/config.yml",
-    "kong:apply": "kongfig apply --path ./kong/config.yml --host localhost:8001"
+    "start": "nodemon -- --inspect=0.0.0.0 index.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,6 +1,5 @@
 version: '3'
 services:
-
   customers:
     container_name: customers
     build: .
@@ -10,9 +9,6 @@ services:
       - /usr/src/node_modules
     ports:
       - 9229:9229
-    networks:
-      - application
-      - bus
 
   invoices:
     container_name: invoices
@@ -23,83 +19,23 @@ services:
       - /usr/src/node_modules
     ports:
       - 9228:9229
-    networks:
-      - application
-      - bus
 
   mongo:
     container_name: mongo
     image: mongo
     volumes:
       - mongo-data:/data/db
-    networks:
-      - application
 
-  kong-database:
-    container_name: postgres
-    image: postgres:9.4
-    environment:
-      - POSTGRES_USER=kong
-      - POSTGRES_DB=kong
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - kong
-      
-  kong:
-    container_name: kong
-    build: ./kong/
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-      - 8001:8001
-    environment:
-      - KONG_DATABASE=postgres
-      - KONG_PG_HOST=kong-database
-    volumes:
-      - ./kong/kong.conf:/etc/kong/kong.conf
-    networks:
-      - kong
-      - bus
-
-  eg:
-    container_name: eg
-    build: ./eg
-    command: npm start
-    volumes:
-      - /usr/src/node_modules
-      - ./eg/config:/usr/src/config
+  gateway:
+    container_name: gateway
+    build: ./gateway
     ports:
       - 81:80
       - 9876:9876
-    networks:
-      - eg
-      - bus
-
-  redis:
-    container_name: redis
-    image: redis:alpine
     volumes:
-      - redis-data:/data
-    networks:
-      - eg
+      - ./gateway/config:/usr/src/config
+      - /usr/src/node_modules
 
-  konga:
-    container_name: konga
-    image: pgbi/kong-dashboard:v2
-    ports:
-      - 8080:8080
-    networks:
-      - kong
 
 volumes:
   mongo-data:
-  postgres-data:
-  redis-data:
-
-networks:
-  application:
-  kong:
-  eg:
-  bus:

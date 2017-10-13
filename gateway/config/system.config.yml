@@ -1,9 +1,11 @@
 # Core
 db:
   redis:
-    host: redis
+    emulate: true
+    host: localhost
     port: 6379
     namespace: EG
+
 crypto:
   cipherKey: sensitiveKey
   algorithm: aes256
