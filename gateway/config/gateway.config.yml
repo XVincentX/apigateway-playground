@@ -7,8 +7,10 @@ apiEndpoints:
   api:
     host: '*'
 serviceEndpoints:
-  httpbin:
-    url: 'https://httpbin.org'
+  customers:
+    url: 'http://customers:3000/'
+  invoices:
+    url: 'http://invoices:3000/'
 policies:
   - basic-auth
   - cors
@@ -19,11 +21,20 @@ policies:
   - proxy
   - rate-limit
 pipelines:
-  - name: basic
+  - name: default
     apiEndpoints:
       - api
     policies:
       - proxy:
-          - action:
-              serviceEndpoint: httpbin
+          - condition:
+              name: pathExact
+              path: /customers
+            action:
+              serviceEndpoint: customers
+              changeOrigin: true
+          - condition:
+              name: pathExact
+              path: /invoices
+            action:
+              serviceEndpoint: invoices
               changeOrigin: true

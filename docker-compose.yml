@@ -35,6 +35,10 @@ services:
     volumes:
       - ./gateway/config:/usr/src/config
       - /usr/src/node_modules
+    environment:
+      - LOG_LEVEL=debug
+    stdin_open: true
+    tty: true
 
 
 volumes:
