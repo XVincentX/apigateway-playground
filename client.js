@@ -4,13 +4,14 @@ const pick = require("lodash.pick");
 
 const axios = axiosDefault.create({
   baseURL: 'http://localhost:81',
-  auth: {
-    username: 't',
-    password: 't'
-  }
 });
 
 const questions = [{
+  type: 'password',
+  name: 'apikey',
+  message: 'Please type your password',
+  when: (answer) => (!axios.defaults.headers["x-apikey"])
+}, {
   type: 'list',
   name: 'menu',
   message: 'What do you want to do?',
@@ -56,9 +57,13 @@ const ui = new inquirer.ui.BottomBar();
 inquirer
   .prompt(questions)
   .then(handleAnswer)
-  .catch(console.error);
+  .catch((error) => console.error(error.response.statusText));
 
 function handleAnswer(answer) {
+
+  if (!axios.defaults.headers["x-apikey"])
+    axios.defaults.headers["x-apikey"] = answer.apikey;
+
   switch (answer.menu) {
     case 'listCustomer':
       axios
@@ -66,12 +71,12 @@ function handleAnswer(answer) {
         .then((response) => {
           console.log("");
           if (response.data.length === 0)
-            console.log("No customers")
+            console.log("No customers");
           else
             console.log(response.data.map((customer) => pick(customer, ['_id', 'name', 'surname'])));
           return inquirer.prompt(questions).then(handleAnswer);
         })
-        .catch(console.err)
+        .catch((error) => console.error(error.response.statusText))
       break;
     case 'createCustomer':
       axios
@@ -80,7 +85,7 @@ function handleAnswer(answer) {
           console.info("Customer created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);
         })
-        .catch(console.error)
+        .catch((error) => console.error(error.response.statusText))
       break;
     case 'listInvoice':
       axios
@@ -101,7 +106,7 @@ function handleAnswer(answer) {
           console.info("Invoice created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);
         })
-        .catch(console.error)
+        .catch((error) => console.error(error.response.statusText))
       break;
     default:
       return inquirer.prompt(questions).then(handleAnswer);

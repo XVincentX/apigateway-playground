@@ -18,17 +18,33 @@ const Invoice = mongoose.model('invoices', {
 
 const app = express();
 
+const checkRole = (roleType) => {
+  const roleMap = {
+    admin: 2,
+    user: 1,
+    anonymous: 0
+  }
+
+  return (req, res, next) => {
+    if (req.user.role < roleMap[roleType])
+      return res.status(401).send();
+    next();
+  }
+}
+
 app.use(apikey(function (key, next) {
   if (key === "adminKey")
-    return next(null, { name: "admin" })
+    return next(null, { role: 2 })
   else if (key === "userKey")
-    return next(null, { name: "user" })
-  return next(null, { name: "anonymous" });
+    return next(null, { role: 1 })
+  return next(null, { role: 0 });
 }));
+
+
 
 app.use(bodyParser.json());
 
-app.get('/customers/:id?', (req, res) => {
+app.get('/customers/:id?', checkRole('user'), (req, res) => {
   let query = {};
 
   if (req.params.id)
@@ -40,7 +56,7 @@ app.get('/customers/:id?', (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.post('/customers/', (req, res) => {
+app.post('/customers/', checkRole('admin'), (req, res) => {
   (new Customer(req.body))
     .save()
     .then(
@@ -48,7 +64,7 @@ app.post('/customers/', (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.get('/customers/:customerId/invoices/:invoiceId?', (req, res) => {
+app.get('/customers/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
 
@@ -63,7 +79,7 @@ app.get('/customers/:customerId/invoices/:invoiceId?', (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.post('/customers/:customerId/invoices/', (req, res) => {
+app.post('/customers/:customerId/invoices/', checkRole('admin'), (req, res) => {
 
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
