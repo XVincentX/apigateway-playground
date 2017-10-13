@@ -33,4 +33,6 @@ curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Con
 curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"200"}'
 ```
 
+_Alternative_: `node client.js` and fill in your data directly
+
 3. Have fun.

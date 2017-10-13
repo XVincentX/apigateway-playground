@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "node",
+      "request": "launch",
+      "name": "Launch client",
+      "program": "${workspaceFolder}/client.js",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
       "request": "attach",
       "name": "Attach to customers",
       "port": 9229,
