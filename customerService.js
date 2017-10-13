@@ -56,43 +56,6 @@ app.post('/', checkRole('admin'), (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.get('/customers/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
-  if (!req.params.customerId)
-    return res.status(400).send("CustomerID hasn't been provided");
-
-  let query = { customer: req.params.customerId };
-
-  if (req.params.invoiceId)
-    query._id = req.params.invoiceId;
-
-  Invoice.find(query).lean()
-    .then(
-    (invoices) => res.json(invoices),
-    (err) => res.status(500).send(err));
-});
-
-app.post('/customers/:customerId/invoices/', checkRole('admin'), (req, res) => {
-
-  if (!req.params.customerId)
-    return res.status(400).send("CustomerID hasn't been provided");
-
-  Customer.count({ _id: req.params.customerId }).then(
-    (count) => {
-      if (count === 0)
-        return res.status(404).send("No customer found");
-
-      req.body.customer = req.params.customerId;
-
-      (new Invoice(req.body))
-        .save()
-        .then((entity) => res.status(201).send({ id: entity._id }),
-        (err) => res.status(500).send(err));
-
-    },
-    (err) => res.status(500).send(err));
-
-});
-
 mongoose.connect("mongodb://mongo/application", { useMongoClient: true })
   .then(() => app.listen(3000, () => { console.log("Application is ready to go!") }),
   (err) => console.error(`Error during database connection: ${err}`));
