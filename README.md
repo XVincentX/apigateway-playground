@@ -22,8 +22,15 @@ might want to check [Kong](https://getkong.org) as well.
 2. Insert some fixtures
 
 ```bash
-curl -X POST http://customers.apitest.lan/customers -H "Content-Type: application/json" -d '{"name":"Porcesco", "surname":"Gerbone"}'
-curl -X POST http://customers.apitest.lan/customers -H "Content-Type: application/json" -d '{"name":"Vincenzo", "surname":"Chianese"}'
+curl -u t:t -X POST http://localhost:81/customers -H "Content-Type: application/json" -d '{"name":"Porcesco", "surname":"Gerbone"}'
+curl -u t:t -X POST http://localhost:81/customers -H "Content-Type: application/json" -d '{"name":"Vincenzo", "surname":"Chianese"}'
+```
+
+Grab the returned ID and create some followup fake data
+
+```bash
+curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"150"}'
+curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"200"}'
 ```
 
 3. Have fun.

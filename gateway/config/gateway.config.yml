@@ -26,15 +26,6 @@ pipelines:
       - api
     policies:
       - proxy:
-          - condition:
-              name: pathExact
-              path: /customers
-            action:
+          - action:
               serviceEndpoint: customers
-              changeOrigin: true
-          - condition:
-              name: pathExact
-              path: /invoices
-            action:
-              serviceEndpoint: invoices
               changeOrigin: true

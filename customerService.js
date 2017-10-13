@@ -23,7 +23,7 @@ app.use(apikey(function (key, next) {
     return next(null, { name: "admin" })
   else if (key === "userKey")
     return next(null, { name: "user" })
-  return next(null, null);
+  return next(null, { name: "anonymous" });
 }));
 
 app.use(bodyParser.json());
