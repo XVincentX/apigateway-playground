@@ -19,12 +19,11 @@ const Invoice = mongoose.model('invoices', {
 const app = express();
 
 app.use(apikey(function (key, next) {
-  // return next(null, {});
-
   if (key === "adminKey")
     return next(null, { name: "admin" })
   else if (key === "userKey")
     return next(null, { name: "user" })
+  return next(null, null);
 }));
 
 app.use(bodyParser.json());
