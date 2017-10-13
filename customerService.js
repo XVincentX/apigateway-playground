@@ -34,8 +34,6 @@ app.use(apikey(function (key, next) {
   return next(null, { role: 0 });
 }));
 
-
-
 app.use(bodyParser.json());
 
 app.get('/:id?', checkRole('user'), (req, res) => {
