@@ -29,3 +29,12 @@ pipelines:
           - action:
               serviceEndpoint: customers
               changeOrigin: true
+            condition:
+              name: hostMatch
+              pattern: 'customers.apitest.lan*'
+          - action:
+              serviceEndpoint: invoices
+              changeOrigin: true
+            condition:
+              name: hostMatch
+              pattern: 'invoices.apitest.lan*'
