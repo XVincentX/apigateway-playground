@@ -1,8 +1,7 @@
 # Core
 db:
   redis:
-    emulate: true
-    host: localhost
+    host: redis
     port: 6379
     namespace: EG
 

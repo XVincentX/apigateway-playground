@@ -40,6 +40,12 @@ services:
     stdin_open: true
     tty: true
 
+  redis:
+    container_name: redis
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
 
 volumes:
   mongo-data:
+  redis-data:
