@@ -26,7 +26,12 @@
     "urijs": "^1.19.0"
 =======
     "mongoose": "^4.13.0",
+<<<<<<< HEAD
     "nodemon": "^1.12.1"
 >>>>>>> Check roles on invoice microservice
+=======
+    "nodemon": "^1.12.1",
+    "urijs": "^1.19.0"
+>>>>>>> Add uri.js
   }
 }
