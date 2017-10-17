@@ -7,7 +7,15 @@ const plugin = {
   policies: ['apiroot'],
   init: function (pluginContext) {
     pluginContext.registerGatewayRoute((app) => {
-      app.get('/nasino', (req, res) => res.send('hello'));
+      app.get('/apiroot', (req, res) => res.json({
+        url: '/',
+        actions: [
+          { url: 'http://customers.apitest.lan:81/', value: 'listCustomer' },
+          { url: 'http://customers.apitest.lan:81/customers', value: 'createCustomer' },
+          { url: 'http://invoices.apitest.lan:81/:customerId/invoices/', value: 'listInvoice' },
+          { url: 'http://invoices.apitest.lan:81/:customerId/invoices/', value: 'createInvoice' },
+        ]
+      }));
     });
   }
 }
