@@ -12,8 +12,8 @@ const plugin = {
         actions: [
           { url: 'http://customers.apitest.lan:81/', value: 'listCustomer' },
           { url: 'http://customers.apitest.lan:81/customers', value: 'createCustomer' },
-          { url: 'http://invoices.apitest.lan:81/:customerId/invoices/', value: 'listInvoice' },
-          { url: 'http://invoices.apitest.lan:81/:customerId/invoices/', value: 'createInvoice' },
+          { url: 'http://invoices.apitest.lan:81/{customerId}/invoices/', value: 'listInvoice' },
+          { url: 'http://invoices.apitest.lan:81/{customerId}/invoices/', value: 'createInvoice' },
         ]
       }));
     });
