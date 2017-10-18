@@ -21,11 +21,6 @@
     "inquirer": "^3.3.0",
     "lodash.pick": "^4.4.0",
     "mongoose": "^4.12.1",
-<<<<<<< HEAD
     "nodemon": "^1.12.1"
-=======
-    "nodemon": "^1.12.1",
-    "urijs": "^1.19.0"
->>>>>>> Add uri.js
   }
 }
