@@ -56,8 +56,6 @@ const questions = [{
   name: "amount"
 }];
 
-const ui = new inquirer.ui.BottomBar();
-
 inquirer
   .prompt(questions)
   .then(handleAnswer)
