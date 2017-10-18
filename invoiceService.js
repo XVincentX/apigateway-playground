@@ -51,7 +51,7 @@ app.get('/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
   Invoice.find(query).lean()
     .then((invoices) => res.json(invoices.map((invoice) => ({
       ...invoice,
-      url: `http://invoices.apitest.lan:81/${query.customer}/${invoice.id}`,
+      url: `http://invoices.apitest.lan:81/${query.customer}/${invoice._id}`,
       customer_url: `http://customers.apitest.lan:81/${query.customer}`
     }))))
     .catch((err) => res.status(500).send(err));

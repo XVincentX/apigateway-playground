@@ -46,8 +46,8 @@ app.get('/:id?', checkRole('user'), (req, res) => {
     .then(
     (customers) => res.json(customers.map((customer) => ({
       ...customer,
-      invoices_url: `http://invoices.apitest.lan:81/${customer.id}/invoices`,
-      url: `http://customers.apitest.lan:81/${customer.id}`
+      invoices_url: `http://invoices.apitest.lan:81/${customer._id}/invoices`,
+      url: `http://customers.apitest.lan:81/${customer._id}`
     }))),
     (err) => res.status(500).send(err));
 });
