@@ -49,9 +49,12 @@ app.get('/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
     query._id = req.params.invoiceId;
 
   Invoice.find(query).lean()
-    .then(
-    (invoices) => res.json(invoices),
-    (err) => res.status(500).send(err));
+    .then((invoices) => res.json(invoices.map((invoice) => ({
+      ...invoice,
+      url: `http://invoices.apitest.lan:81/${query.customer}/${invoice.id}`,
+      customer_url: `http://customers.apitest.lan:81/${query.customer}`
+    }))))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.post('/:customerId/invoices/', checkRole('admin'), (req, res) => {
@@ -68,8 +71,8 @@ app.post('/:customerId/invoices/', checkRole('admin'), (req, res) => {
 
       (new Invoice(req.body))
         .save()
-        .then((entity) => res.status(201).send({ id: entity._id }),
-        (err) => res.status(500).send(err));
+        .then((entity) => res.status(201).send({ id: entity._id }))
+        .catch((err) => res.status(500).send(err));
 
     },
     (err) => res.status(err.response.status || 500).send(err.message || err.code));
