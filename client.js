@@ -1,6 +1,7 @@
 const axiosDefault = require("axios").default;
 const inquirer = require("inquirer");
 const pick = require("lodash.pick");
+require('console.table');
 
 const axios = axiosDefault.create({
   baseURL: 'http://localhost:81',
@@ -73,7 +74,7 @@ function handleAnswer(answer) {
           if (response.data.length === 0)
             console.log("No customers");
           else
-            console.log(response.data.map((customer) => pick(customer, ['_id', 'name', 'surname'])));
+            console.table(response.data.map((customer) => pick(customer, ['_id', 'name', 'surname'])));
           return inquirer.prompt(questions).then(handleAnswer);
         })
         .catch((error) => console.error(error.response.statusText))
@@ -95,7 +96,7 @@ function handleAnswer(answer) {
           if (response.data.length === 0)
             console.log("No invoices!");
           else
-            console.log(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
+            console.table(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
           return inquirer.prompt(questions).then(handleAnswer);
         });
       break;
