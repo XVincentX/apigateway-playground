@@ -20,18 +20,8 @@
     "express": "^4.16.2",
     "inquirer": "^4.0.0",
     "lodash.pick": "^4.4.0",
-<<<<<<< HEAD
     "mongoose": "^4.13.4",
     "nodemon": "^1.12.1",
     "urijs": "^1.19.0"
-=======
-    "mongoose": "^4.13.0",
-<<<<<<< HEAD
-    "nodemon": "^1.12.1"
->>>>>>> Check roles on invoice microservice
-=======
-    "nodemon": "^1.12.1",
-    "urijs": "^1.19.0"
->>>>>>> Add uri.js
   }
 }

@@ -34,29 +34,19 @@ const questions = [{
   type: 'list',
   when: (answer) => answer.menu === 'listInvoice' || answer.menu === 'createInvoice',
   message: 'Select a customer',
-<<<<<<< HEAD
   name: 'customer',
-=======
-  name: 'customerId',
->>>>>>> Show invoices only to who has an invoice url
   choices: (answer) => {
     if (!axios.defaults.headers["x-apikey"])
       axios.defaults.headers["x-apikey"] = answer.apikey;
 
     return axios
       .get(serverChoices.filter((sc => sc.value === 'listCustomer'))[0].url)
-<<<<<<< HEAD
-      .then(response => response.data.map(customer => ({ value: customer._id, name: `${customer.name} ${customer.surname}` })))
-  }
-
-=======
       .then(response =>
         response.data
           .filter(customer => customer.invoices_url !== undefined)
           .map(customer => ({ value: { id: customer._id, invoices_url: customer.invoices_url }, name: `${customer.name} ${customer.surname}` }))
       );
   }
->>>>>>> Show invoices only to who has an invoice url
 }, {
   type: 'input',
   when: (answer) => answer.menu === 'createInvoice',
@@ -118,7 +108,7 @@ function handleAnswer(answer) {
       break;
     case 'createInvoice':
       axios
-        .post(URITemplate(url).expand({ customerId: answer.customerId }), pick(answer, ['date', 'amount']))
+        .post(URITemplate(url).expand({ customerId: answer.customer.id }), pick(answer, ['date', 'amount']))
         .then((response) => {
           console.info("Invoice created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);

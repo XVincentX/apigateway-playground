@@ -33,11 +33,6 @@ pipelines:
         - action:
             apiKeyHeader: x-apikey
             disableHeadersScheme: true
-      - expression:
-        - action:
-            jscode: >
-              req.headers['eg-consumer-id'] = req.user.id;
-              req.headers['eg-consumer-type'] = req.user.type;
       - proxy:
           - action:
               serviceEndpoint: customers
