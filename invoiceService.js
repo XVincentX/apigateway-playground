@@ -39,7 +39,7 @@ app.use(apikey(function (key, next) {
 
 app.use(bodyParser.json());
 
-app.get('/:customerId/invoices/:invoiceId?', (req, res) => {
+app.get('/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
 
@@ -54,7 +54,7 @@ app.get('/:customerId/invoices/:invoiceId?', (req, res) => {
     (err) => res.status(500).send(err));
 });
 
-app.post('/:customerId/invoices/', (req, res) => {
+app.post('/:customerId/invoices/', checkRole('admin'), (req, res) => {
 
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
