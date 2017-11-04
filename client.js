@@ -38,9 +38,14 @@ const questions = [{
   when: (answer) => answer.menu === 'listInvoice' || answer.menu === 'createInvoice',
   message: 'Select a customer',
   name: 'customerId',
-  choices: () => axios
-    .get('/customers')
-    .then(response => response.data.map(customer => ({ value: customer._id, name: `${customer.name} ${customer.surname}` })))
+  choices: (answer) => {
+    if (!axios.defaults.headers["x-apikey"])
+      axios.defaults.headers["x-apikey"] = answer.apikey;
+
+    return axios
+      .get('/customers')
+      .then(response => response.data.map(customer => ({ value: customer._id, name: `${customer.name} ${customer.surname}` })))
+  }
 }, {
   type: 'input',
   when: (answer) => answer.menu === 'createInvoice',
@@ -89,16 +94,19 @@ function handleAnswer(answer) {
         .catch((error) => console.error(error.response.statusText))
       break;
     case 'listInvoice':
-      axios
-        .get(`/customers/${answer.customerId}/invoices`)
-        .then((response) => {
-          console.log("");
-          if (response.data.length === 0)
-            console.log("No invoices!");
-          else
-            console.table(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
-          return inquirer.prompt(questions).then(handleAnswer);
-        });
+      if (answer.customerId) {
+        return axios
+          .get(`/customers/${answer.customerId}/invoices`)
+          .then((response) => {
+            console.log("");
+            if (response.data.length === 0)
+              console.log("No invoices!");
+            else
+              console.table(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
+            return inquirer.prompt(questions).then(handleAnswer);
+          });
+      }
+      return inquirer.prompt(questions).then(handleAnswer);
       break;
     case 'createInvoice':
       axios
