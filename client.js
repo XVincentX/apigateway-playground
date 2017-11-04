@@ -37,14 +37,14 @@ const questions = [{
   type: 'list',
   when: (answer) => answer.menu === 'listInvoice' || answer.menu === 'createInvoice',
   message: 'Select a customer',
-  name: 'customerId',
+  name: 'customer',
   choices: (answer) => {
     if (!axios.defaults.headers["x-apikey"])
       axios.defaults.headers["x-apikey"] = answer.apikey;
 
     return axios
       .get('/customers')
-      .then(response => response.data.map(customer => ({ value: customer._id, name: `${customer.name} ${customer.surname}` })))
+      .then(response => response.data.map(customer => ({ value: { id: customer._id }, name: `${customer.name} ${customer.surname}` })))
   }
 }, {
   type: 'input',
@@ -94,9 +94,9 @@ function handleAnswer(answer) {
         .catch((error) => console.error(error.response.statusText))
       break;
     case 'listInvoice':
-      if (answer.customerId) {
+      if (answer.customer.id) {
         return axios
-          .get(`/customers/${answer.customerId}/invoices`)
+          .get(`/customers/${answer.customer.id}/invoices`)
           .then((response) => {
             console.log("");
             if (response.data.length === 0)
@@ -110,7 +110,7 @@ function handleAnswer(answer) {
       break;
     case 'createInvoice':
       axios
-        .post(`/customers/${answer.customerId}/invoices`, pick(answer, ['date', 'amount']))
+        .post(`/customers/${answer.customer.id}/invoices`, pick(answer, ['date', 'amount']))
         .then((response) => {
           console.info("Invoice created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);
