@@ -14,13 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "apikey": "^0.1.2",
-    "axios": "^0.16.2",
+    "axios": "^0.17.0",
     "body-parser": "^1.18.2",
     "console.table": "^0.9.1",
     "express": "^4.16.2",
     "inquirer": "^3.3.0",
     "lodash.pick": "^4.4.0",
-    "mongoose": "^4.12.1",
+    "mongoose": "^4.13.0",
     "nodemon": "^1.12.1"
   }
 }
