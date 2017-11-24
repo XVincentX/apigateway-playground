@@ -10,11 +10,17 @@ const Customer = mongoose.model('customers', {
   surname: String
 });
 
+const Invoice = mongoose.model('invoices', {
+  date: Date,
+  amount: Number,
+  customer: [{ type: mongoose.Schema.Types.ObjectId, ref: 'customer' }]
+});
+
 const app = express();
 
 app.use(bodyParser.json());
 
-app.get('/:id?', (req, res) => {
+app.get('/customers/:id?', (req, res) => {
   let query = {};
 
   if (req.params.id)
@@ -24,19 +30,61 @@ app.get('/:id?', (req, res) => {
     .then(
     (customers) => res.json(customers.map((customer) => ({
       ...customer,
-      invoices_url: `http://invoices.apitest.lan:81/${customer._id}/invoices`,
-      url: `http://customers.apitest.lan:81/${customer._id}`
+      invoices_url: `http://customers.apitest.lan:81/invoices/${customer._id}`,
+      url: `http://customers.apitest.lan:81/customers/${customer._id}`
     }))),
     (err) => res.status(500).send(err));
 });
 
-app.post('/', (req, res) => {
+app.post('/customers/', (req, res) => {
   (new Customer(req.body))
     .save()
     .then(
     (entity) => res.status(201).send({ id: entity._id }),
     (err) => res.status(500).send(err));
 });
+
+
+app.get('/invoices/:customerId/:invoiceId?', (req, res) => {
+  if (!req.params.customerId)
+    return res.status(400).send("CustomerID hasn't been provided");
+
+  let query = { customer: req.params.customerId };
+
+  if (req.params.invoiceId)
+    query._id = req.params.invoiceId;
+
+  Invoice.find(query).lean()
+    .then((invoices) => res.json(invoices.map((invoice) => ({
+      ...invoice,
+      url: `http://customers.apitest.lan:81/customers/invoices/${query.customer}/${invoice._id}`,
+      customer_url: `http://customers.apitest.lan:81/customers/${query.customer}`
+    }))))
+    .catch((err) => res.status(500).send(err));
+});
+
+app.post('/invoices/:customerId', (req, res) => {
+
+  if (!req.params.customerId)
+    return res.status(400).send("CustomerID hasn't been provided");
+
+  Customer.count({ _id: req.params.customerId }).then(
+    (count) => {
+      if (count === 0)
+        return res.status(404).send("No customer found");
+
+      req.body.customer = req.params.customerId;
+
+      (new Invoice(req.body))
+        .save()
+        .then((entity) => res.status(201).send({ id: entity._id }),
+        (err) => res.status(500).send(err));
+
+    },
+    (err) => res.status(500).send(err));
+
+});
+
 
 mongoose.connect("mongodb://mongo/application", { useMongoClient: true })
   .then(() => app.listen(3000, () => { console.log("Application is ready to go!") }),

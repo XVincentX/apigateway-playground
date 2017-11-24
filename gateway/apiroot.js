@@ -10,10 +10,10 @@ const plugin = {
       app.get('/apiroot', (req, res) => res.json({
         url: '/',
         actions: [
-          { url: 'http://customers.apitest.lan:81/', value: 'listCustomer' },
-          { url: 'http://customers.apitest.lan:81/', value: 'createCustomer' },
-          { url: 'http://invoices.apitest.lan:81/{customerId}/invoices/', value: 'listInvoice' },
-          { url: 'http://invoices.apitest.lan:81/{customerId}/invoices/', value: 'createInvoice' },
+          { url: 'http://customers.apitest.lan:81/customers', value: 'listCustomer' },
+          { url: 'http://customers.apitest.lan:81/customers', value: 'createCustomer' },
+          { url: 'http://customers.apitest.lan:81/invoices/{customerId}/', value: 'listInvoice' },
+          { url: 'http://customers.apitest.lan:81/invoices/{customerId}/', value: 'createInvoice' },
         ]
       }));
     });
