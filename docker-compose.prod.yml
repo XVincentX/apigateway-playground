@@ -1,0 +1,34 @@
+version: '2'
+services:
+  customers:
+    container_name: customers
+    image: "xvincentx/apigatewayplayground_customers:microservice-gateway-hypermedia"
+    command: node customerService.js
+
+  invoices:
+    container_name: invoices
+    image: "xvincentx/apigatewayplayground_invoices:microservice-gateway-hypermedia"
+    command: node invoiceService.js
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+
+  gateway:
+    container_name: gateway
+    image: "xvincentx/apigatewayplayground_gateway:microservice-gateway-hypermedia"
+    ports:
+      - 80:80
+      - 9876:9876
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+
+volumes:
+  mongo-data:
+  redis-data:

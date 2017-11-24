@@ -33,7 +33,7 @@ services:
       - 81:80
       - 9876:9876
     volumes:
-      - ./gateway/config:/usr/src/config
+      - ./gateway:/usr/src
       - /usr/src/node_modules
     environment:
       - LOG_LEVEL=debug

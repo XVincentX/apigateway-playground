@@ -1,11 +1,14 @@
 const axiosDefault = require("axios").default;
 const inquirer = require("inquirer");
 const pick = require("lodash.pick");
+const URITemplate = require("urijs/src/URITemplate");
 require('console.table');
 
 const axios = axiosDefault.create({
   baseURL: 'http://localhost:81',
 });
+
+let serverChoices = null;
 
 const questions = [{
   type: 'password',
@@ -16,13 +19,7 @@ const questions = [{
   type: 'list',
   name: 'menu',
   message: 'What do you want to do?',
-  choices: [
-    { name: 'List customers', value: 'listCustomer' },
-    { name: 'Create customer', value: 'createCustomer' },
-    new inquirer.Separator(),
-    { name: 'List invoices', value: 'listInvoice' },
-    { name: 'Create new invoice', value: 'createInvoice' },
-  ]
+  choices: () => axios.get('/apiroot').then(res => { serverChoices = res.data.actions; return res.data.actions })
 }, {
   type: 'input',
   when: (answer) => answer.menu === 'createCustomer',
@@ -43,8 +40,12 @@ const questions = [{
       axios.defaults.headers["x-apikey"] = answer.apikey;
 
     return axios
-      .get('/customers')
-      .then(response => response.data.map(customer => ({ value: { id: customer._id }, name: `${customer.name} ${customer.surname}` })))
+      .get(serverChoices.filter((sc => sc.value === 'listCustomer'))[0].url)
+      .then(response =>
+        response.data
+          .filter(customer => customer.invoices_url !== undefined)
+          .map(customer => ({ value: { id: customer._id, invoices_url: customer.invoices_url }, name: `${customer.name} ${customer.surname}` }))
+      );
   }
 }, {
   type: 'input',
@@ -58,8 +59,6 @@ const questions = [{
   name: "amount"
 }];
 
-const ui = new inquirer.ui.BottomBar();
-
 inquirer
   .prompt(questions)
   .then(handleAnswer)
@@ -70,10 +69,12 @@ function handleAnswer(answer) {
   if (!axios.defaults.headers["x-apikey"])
     axios.defaults.headers["x-apikey"] = answer.apikey;
 
+  const url = serverChoices.filter(sc => sc.value === answer.menu)[0].url;
+
   switch (answer.menu) {
     case 'listCustomer':
       axios
-        .get('/customers')
+        .get(url)
         .then((response) => {
           console.log("");
           if (response.data.length === 0)
@@ -86,7 +87,7 @@ function handleAnswer(answer) {
       break;
     case 'createCustomer':
       axios
-        .post('/customers', pick(answer, ['name', 'surname']))
+        .post(url, pick(answer, ['name', 'surname']))
         .then((response) => {
           console.info("Customer created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);
@@ -94,23 +95,20 @@ function handleAnswer(answer) {
         .catch((error) => console.error(error.response.statusText))
       break;
     case 'listInvoice':
-      if (answer.customer.id) {
-        return axios
-          .get(`/customers/${answer.customer.id}/invoices`)
-          .then((response) => {
-            console.log("");
-            if (response.data.length === 0)
-              console.log("No invoices!");
-            else
-              console.table(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
-            return inquirer.prompt(questions).then(handleAnswer);
-          });
-      }
-      return inquirer.prompt(questions).then(handleAnswer);
+      axios
+        .get(URITemplate(answer.customer.invoices_url).expand({ customerId: answer.customer.id }))
+        .then((response) => {
+          console.log("");
+          if (response.data.length === 0)
+            console.log("No invoices!");
+          else
+            console.table(response.data.map((customer) => pick(customer, ['_id', 'date', 'amount'])));
+          return inquirer.prompt(questions).then(handleAnswer);
+        });
       break;
     case 'createInvoice':
       axios
-        .post(`/customers/${answer.customer.id}/invoices`, pick(answer, ['date', 'amount']))
+        .post(URITemplate(url).expand({ customerId: answer.customer.id }), pick(answer, ['date', 'amount']))
         .then((response) => {
           console.info("Invoice created successfully!");
           return inquirer.prompt(questions).then(handleAnswer);

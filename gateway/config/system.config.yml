@@ -10,6 +10,10 @@ crypto:
   algorithm: aes256
   saltRounds: 10
 
+plugins:
+   apiroot:
+    package: './apiroot.js'
+
 # OAuth2 Settings
 session:
   secret: keyboard cat
