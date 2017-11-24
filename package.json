@@ -22,6 +22,7 @@
     "inquirer": "^5.0.0",
     "lodash.pick": "^4.4.0",
     "mongoose": "^4.13.9",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "urijs": "^1.19.0"
   }
 }
