@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "express-gateway": "^1.3.0"
+    "express-gateway": "^1.4.0"
   }
 }

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Useless application",
   "repository": {
-    "url": "https://github.com/XVincentX/kong-node",
+    "url": "https://github.com/XVincentX/apigateway-playground",
     "type": "git"
   },
   "main": "index.js",
@@ -14,13 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "apikey": "^0.1.2",
-    "axios": "^0.17.0",
+    "axios": "^0.17.1",
     "body-parser": "^1.18.2",
     "console.table": "^0.9.1",
     "express": "^4.16.2",
-    "inquirer": "^3.3.0",
+    "inquirer": "^4.0.0",
     "lodash.pick": "^4.4.0",
-    "mongoose": "^4.13.0",
+    "mongoose": "^4.13.4",
     "nodemon": "^1.12.1"
   }
 }
