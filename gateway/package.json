@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "express-gateway": "^1.4.0"
+    "express-gateway": "git+https://github.com/expressgateway/express-gateway.git#master"
   }
 }
