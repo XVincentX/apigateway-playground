@@ -30,7 +30,7 @@ services:
     container_name: gateway
     build: ./gateway
     ports:
-      - 81:80
+      - 80:80
       - 9876:9876
     volumes:
       - ./gateway/config:/usr/src/config

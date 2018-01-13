@@ -4,7 +4,7 @@ const pick = require("lodash.pick");
 require('console.table');
 
 const axios = axiosDefault.create({
-  baseURL: 'http://api.apitest.lan:81',
+  baseURL: 'http://api.apitest.lan',
 });
 
 const questions = [{
