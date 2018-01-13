@@ -8,7 +8,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -- --inspect=0.0.0.0 index.js"
+    "start": "node index.js",
+    "start:dev": "nodemon -- --inspect=0.0.0.0 index.js"
   },
   "author": "",
   "license": "ISC",
