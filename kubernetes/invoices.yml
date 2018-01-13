@@ -24,5 +24,5 @@ spec:
     spec:
       containers:
       - name: invoices
-        image: xvincentx/apigatewayplayground_invoices:master
+        image: xvincentx/apigatewayplayground_invoices:microservice
         imagePullPolicy: Always
