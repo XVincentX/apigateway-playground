@@ -22,17 +22,31 @@ might want to check [Kong](https://getkong.org) as well.
 2. Insert some fixtures
 
 ```bash
-curl -u t:t -X POST http://localhost:81/customers -H "Content-Type: application/json" -d '{"name":"Porcesco", "surname":"Gerbone"}'
-curl -u t:t -X POST http://localhost:81/customers -H "Content-Type: application/json" -d '{"name":"Vincenzo", "surname":"Chianese"}'
+curl -u t:t -X POST http://localhost/customers -H "Content-Type: application/json" -d '{"name":"Porcesco", "surname":"Gerbone"}'
+curl -u t:t -X POST http://localhost/customers -H "Content-Type: application/json" -d '{"name":"Vincenzo", "surname":"Chianese"}'
 ```
 
 Grab the returned ID and create some followup fake data
 
 ```bash
-curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"150"}'
-curl -u t:t -X POST http://localhost:81/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"200"}'
+curl -u t:t -X POST http://localhost/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"150"}'
+curl -u t:t -X POST http://localhost/customers/${customerId}/invoices -H "Content-Type: application/json" -d '{"date":"1507889426524", "amount":"200"}'
 ```
 
 _Alternative_: `node client.js` and fill in your data directly
 
 3. Have fun.
+
+## Kubernetes
+
+There's also a directory called `kubernetes` that contains a set of files to deploy the application and the dependencies
+in any Kubernetes cluster. In that case, instead of `localhost`, you might need to enter the IP address assigned by
+the cluster.
+
+## Comparing the changes
+
+You can see the changes from monolith to hypermedia and viceversa using the following Github compare links:
+
+* https://github.com/XVincentX/apigateway-playground/compare/master...microservice
+* https://github.com/XVincentX/apigateway-playground/compare/microservice...microservice-gateway-hypermedia
+* https://github.com/XVincentX/apigateway-playground/compare/microservice-gateway-hypermedia...monolith-hypermedia
