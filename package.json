@@ -18,9 +18,9 @@
     "body-parser": "^1.18.2",
     "console.table": "^0.9.1",
     "express": "^4.16.2",
-    "inquirer": "^4.0.0",
+    "inquirer": "^5.0.0",
     "lodash.pick": "^4.4.0",
-    "mongoose": "^4.13.4",
-    "nodemon": "^1.12.1"
+    "mongoose": "^4.13.9",
+    "nodemon": "^1.14.11"
   }
 }
