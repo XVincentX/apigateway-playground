@@ -57,7 +57,7 @@ app.get('/customers/:id?', checkRole('user'), (req, res) => {
 });
 
 app.post('/customers/', checkRole('admin'), (req, res) => {
-  (new Customer(req.body))
+  Customer.create(req.body)
     .save()
     .then(
     (entity) => res.status(201).send({ id: entity._id }),
@@ -91,7 +91,7 @@ app.post('/customers/:customerId/invoices/', checkRole('admin'), (req, res) => {
 
       req.body.customer = req.params.customerId;
 
-      (new Invoice(req.body))
+      Invoice.create(req.body)
         .save()
         .then((entity) => res.status(201).send({ id: entity._id }),
         (err) => res.status(500).send(err));
