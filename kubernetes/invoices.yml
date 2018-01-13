@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: invoices
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: invoices
+    spec:
+      containers:
+      - name: invoices
+        image: xvincentx/apigatewayplayground_invoices:master
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invoices
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: invoices
+  type: NodePort
