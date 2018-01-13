@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:8-alpine
 
 ENV NODE_ENV production
 ENV CHOKIDAR_USEPOLLING true
