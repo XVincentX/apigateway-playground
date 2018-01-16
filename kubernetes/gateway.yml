@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: gateway
+  type: ClusterIP
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -13,16 +26,3 @@ spec:
       - name: gateway
         image: xvincentx/apigatewayplayground_gateway:master
         imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gateway
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 80
-  selector:
-    app: gateway
-  type: ClusterIP

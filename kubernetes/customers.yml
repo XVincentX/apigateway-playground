@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customers
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: customers
+  type: NodePort
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -13,16 +26,3 @@ spec:
       - name: customers
         image: xvincentx/apigatewayplayground_customers:master
         imagePullPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: customers
-spec:
-  ports:
-    - name: http
-      port: 3000
-      targetPort: 3000
-  selector:
-    app: customers
-  type: NodePort
