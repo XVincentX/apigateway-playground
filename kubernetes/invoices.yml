@@ -25,4 +25,3 @@ spec:
       containers:
       - name: invoices
         image: xvincentx/apigatewayplayground_invoices:microservice
-        imagePullPolicy: Always

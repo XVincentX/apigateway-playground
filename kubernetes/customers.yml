@@ -25,4 +25,3 @@ spec:
       containers:
       - name: customers
         image: xvincentx/apigatewayplayground_customers:microservice
-        imagePullPolicy: Always

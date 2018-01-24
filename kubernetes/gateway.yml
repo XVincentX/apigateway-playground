@@ -25,4 +25,3 @@ spec:
       containers:
       - name: gateway
         image: xvincentx/apigatewayplayground_gateway:microservice
-        imagePullPolicy: Always

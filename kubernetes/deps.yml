@@ -25,7 +25,6 @@ spec:
       containers:
       - name: mongo
         image: mongo
-        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -54,4 +53,3 @@ spec:
       containers:
       - name: redis
         image: redis:alpine
-        imagePullPolicy: Always
