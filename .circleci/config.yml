@@ -16,10 +16,8 @@ jobs:
             chmod +x /usr/local/bin/docker-compose
       - run: docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
       - run: docker-compose push
-      - run: "docker tag apigatewayplayground_gateway $DOCKER_USER/apigatewayplayground_gateway:$CIRCLE_BRANCH"
       - run: "docker tag apigatewayplayground_customers $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
       - run: "docker tag apigatewayplayground_invoices $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH"
-      - run: "docker push $DOCKER_USER/apigatewayplayground_gateway:$CIRCLE_BRANCH"
       - run: "docker push $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
       - run: "docker push $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH"
 

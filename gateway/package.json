@@ -1,8 +1,0 @@
-{
-  "name": "eg",
-  "version": "1.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "express-gateway": "git+https://github.com/expressgateway/express-gateway.git#master"
-  }
-}

@@ -15,7 +15,3 @@ services:
       dockerfile: Dockerfile.prod
       args:
         FILE: invoiceService.js
-
-  gateway:
-    container_name: gateway
-    build: ./gateway

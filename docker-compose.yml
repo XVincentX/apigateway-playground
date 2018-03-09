@@ -26,22 +26,5 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  gateway:
-    container_name: gateway
-    build: ./gateway
-    ports:
-      - 80:80
-      - 9876:9876
-    volumes:
-      - ./gateway/config:/usr/src/config
-      - /usr/src/node_modules
-
-  redis:
-    container_name: redis
-    image: redis:alpine
-    volumes:
-      - redis-data:/data
-
 volumes:
   mongo-data:
-  redis-data:
