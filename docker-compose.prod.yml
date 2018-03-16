@@ -1,0 +1,17 @@
+version: '3'
+services:
+  customers:
+    container_name: customers
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        FILE: customerService.js
+
+  invoices:
+    container_name: invoices
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      args:
+        FILE: invoiceService.js
