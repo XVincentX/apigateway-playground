@@ -1,0 +1,30 @@
+version: '3'
+services:
+  customers:
+    container_name: customers
+    build: .
+    command: ./node_modules/.bin/nodemon -- --inspect=0.0.0.0 customerService.js
+    volumes:
+      - ./customerService.js:/usr/src/customerService.js
+      - /usr/src/node_modules
+    ports:
+      - 9229:9229
+
+  invoices:
+    container_name: invoices
+    build: .
+    command: ./node_modules/.bin/nodemon -- --inspect=0.0.0.0 invoiceService.js
+    volumes:
+      - ./invoiceService.js:/usr/src/invoiceService.js
+      - /usr/src/node_modules
+    ports:
+      - 9228:9229
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
