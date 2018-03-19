@@ -26,5 +26,18 @@ services:
     volumes:
       - mongo-data:/data/db
 
+  gateway:
+    container_name: gateway
+    build: ./gateway
+    command: node --inspect=0.0.0.0 server.js
+    ports:
+      - 80:80
+      - 9876:9876
+      - 9227:9229
+    volumes:
+      - ./gateway:/usr/src
+      - ./gateway/config:/usr/src/config
+      - /usr/src/node_modules
+
 volumes:
   mongo-data:

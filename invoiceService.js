@@ -26,9 +26,12 @@ app.get('/:customerId/invoices/:invoiceId?', (req, res) => {
     query._id = req.params.invoiceId;
 
   Invoice.find(query).lean()
-    .then(
-      (invoices) => res.json(invoices),
-      (err) => res.status(500).send(err));
+    .then((invoices) => res.json(invoices.map((invoice) => ({
+      ...invoice,
+      url: `http://invoices.apitest.lan/${query.customer}/${invoice._id}`,
+      customer_url: `http://customers.apitest.lan/${query.customer}`
+    }))))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.post('/:customerId/invoices/', (req, res) => {
@@ -44,8 +47,8 @@ app.post('/:customerId/invoices/', (req, res) => {
       req.body.customer = req.params.customerId;
 
       Invoice.create(req.body)
-        .then((entity) => res.status(201).send({ id: entity._id }),
-          (err) => res.status(500).send(err));
+        .then((entity) => res.status(201).send({ id: entity._id }))
+        .catch((err) => res.status(500).send(err));
 
     },
     (err) => res.status(err.response.status || 500).send(err.message || err.code));
