@@ -57,4 +57,4 @@ app.post('/:customerId/invoices/', (req, res) => {
 
 mongoose.connect("mongodb://mongo:27017/application", { useNewUrlParser: true })
   .then(() => app.listen(3000, () => { console.log("Application is ready to go!") }),
-    (err) => console.error(`Error during database connection: ${err}`));
+  (err) => console.error(`Error during database connection: ${err}`));

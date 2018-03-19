@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "JSONStream": "^1.3.2",
     "express-gateway": "^1.7.3",
-    "express-jwt-authz": "^1.0.0"
+    "express-jwt-authz": "^1.0.0",
+    "kubernetes-client": "^5.0.0",
+    "stream-concat": "^0.2.0"
   }
 }

@@ -27,4 +27,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: xvincentx/apigatewayplayground_gateway:microservice-gateway-hypermedia
+        image: xvincentx/apigatewayplayground_gateway:microservice-gateway-hypermedia-kubernetes
+        env:
+          - name: LOG_LEVEL
+            value: info
