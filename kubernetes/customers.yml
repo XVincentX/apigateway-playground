@@ -9,7 +9,7 @@ spec:
       targetPort: 3000
   selector:
     app: customers
-  type: ClusterIP
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment

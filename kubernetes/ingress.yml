@@ -3,22 +3,6 @@ kind: Ingress
 metadata:
   name: ingress
 spec:
-<<<<<<< HEAD
   backend:
     serviceName: gateway
     servicePort: 8080
-=======
-  rules:
-  - host: customers.apitest.lan
-    http:
-      paths:
-      - backend:
-          serviceName: customers
-          servicePort: 3000
-  - host: invoices.apitest.lan
-    http:
-      paths:
-      - backend:
-          serviceName: invoices
-          servicePort: 3000
->>>>>>> Microservices
