@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
-    "express-gateway": "^1.7.3",
+    "express-gateway": "github:expressgateway/express-gateway#feat/proxy-events",
     "express-jwt-authz": "^1.0.0"
   }
 }
