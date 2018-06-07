@@ -102,7 +102,7 @@ function handleAnswer(answer) {
             if (response.data.length === 0)
               console.log("No customers");
             else
-              console.table(response.data.map((customer) => pick(customer, ['_id', 'name', 'surname'])));
+              console.table(response.data.map((customer) => pick(customer, ['_id', 'fullname'])));
             return inquirer.prompt(questions).then(handleAnswer);
           })
           .catch((error) => console.error(error.response ? error.response.statusText : error))
