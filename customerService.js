@@ -6,8 +6,7 @@ const apikey = require("apikey");
 mongoose.Promise = global.Promise;
 
 const Customer = mongoose.model('customers', {
-  name: String,
-  surname: String
+  fullname: String,
 });
 
 const app = express();
@@ -33,7 +32,7 @@ app.get('/:id?', (req, res) => {
 app.post('/', (req, res) => {
   Customer.create(req.body)
     .then(
-      (entity) => res.status(201).send({ id: entity._id }),
+      (entity) => res.status(201).send(entity),
       (err) => res.status(500).send(err));
 });
 

@@ -46,7 +46,7 @@ pipelines:
               response:
                 add:
                   - name: createdBy
-                    value: "requestID"
+                    value: "req.user.id"
             condition:
               name: hostMatch
               pattern: 'customers.apitest.lan*'
