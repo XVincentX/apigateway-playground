@@ -2,14 +2,31 @@ version: 2
 jobs:
   build:
     docker:
+<<<<<<< HEAD
       - image: circleci/node
+=======
+      - image: moregreenhouse/tm-base
+>>>>>>> A new start
     working_directory: ~/apigatewayplayground
     steps:
       - checkout
       - setup_remote_docker
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+<<<<<<< HEAD
       - run: "docker build --build-arg FILE=customerService.js -t $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH ."
       - run: "docker build --build-arg FILE=invoiceService.js -t $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH ."
       - run: "docker push $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
       - run: "docker push $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH"
+=======
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+      - run: docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+      - run: docker-compose push
+      - run: "docker tag apigatewayplayground_customers $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
+      - run: "docker push $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
+>>>>>>> A new start
 
