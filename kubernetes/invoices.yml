@@ -21,8 +21,11 @@ spec:
       app: invoices
   replicas: 1
   template:
+    metadata:
+      labels:
         app: invoices
     spec:
       containers:
       - name: invoices
-        image: xvincentx/apigatewayplayground_invoices:microservice-gateway-hypermedia
+        image: xvincentx/apigatewayplayground_invoices:microservice-gateway-hypermedia-kubernetes
+
