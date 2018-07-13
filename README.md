@@ -15,9 +15,9 @@ might want to check [Kong](https://getkong.org) as well.
 
 [Docker](https://docker.com) is used as a way to simulate different network topologies.
 
-1. Start all the containers
+1. Start the system
 
-`docker-compose up -d`
+By using Kubernetes or whatever you like
 
 2. Insert some fixtures
 
