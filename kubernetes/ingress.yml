@@ -4,13 +4,13 @@ metadata:
   name: ingress
 spec:
   rules:
-    - host: customer.apitest.lan
+    - host: customers.apitest.lan
       http:
         paths:
         - backend:
             serviceName: customers
             servicePort: 3000
-    - host: invoces.apitest.lan
+    - host: invoices.apitest.lan
       http:
         paths:
           - backend:
