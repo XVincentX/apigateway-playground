@@ -2,7 +2,7 @@ FROM expressgateway/express-gateway
 
 WORKDIR /data
 
-RUN yarn global add express-jwt-authz
+RUN yarn global add express-jwt-authz kubernetes-client
 
 COPY apiroot.js jwtScopes.js /data/
 COPY ./config/ /var/lib/eg/
