@@ -27,4 +27,4 @@ spec:
     spec:
       containers:
       - name: customers
-        image: xvincentx/apigatewayplayground_customers:master
+        image: xvincentx/apigatewayplayground_customers:microservice
