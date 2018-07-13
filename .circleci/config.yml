@@ -10,6 +10,8 @@ jobs:
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run: "docker build --build-arg FILE=customerService.js -t $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH ."
       - run: "docker build --build-arg FILE=invoiceService.js -t $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH ."
+      - run: "docker build -t $DOCKER_USER/apigatewayplayground_gateway:$CIRCLE_BRANCH ./gateway"
       - run: "docker push $DOCKER_USER/apigatewayplayground_customers:$CIRCLE_BRANCH"
+      - run: "docker push $DOCKER_USER/apigatewayplayground_gateway:$CIRCLE_BRANCH"
       - run: "docker push $DOCKER_USER/apigatewayplayground_invoices:$CIRCLE_BRANCH"
 
