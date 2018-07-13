@@ -1,9 +1,0 @@
-{
-  "name": "eg",
-  "version": "1.0.0",
-  "main": "server.js",
-  "dependencies": {
-    "express-gateway": "github:expressgateway/express-gateway#feat/proxy-events",
-    "express-jwt-authz": "^1.0.0"
-  }
-}

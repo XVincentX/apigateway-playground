@@ -21,7 +21,7 @@ policies:
   - jwt
   - jwtScopes
   - proxy
-  - bodyModifier
+  - body-modifier
 pipelines:
   - name: default
     apiEndpoints:
@@ -34,15 +34,15 @@ pipelines:
             secretOrPublicKeyFile: "/var/lib/eg/expressgateway.pem"
             audience: 'https://api.apitest.lan'
       - jwtScopes:
-      - bodyModifier:
+      - body-modifier:
           - action:
               request:
                 add:
                   - name: fullname
                     value: "req.body.name + ' ' + req.body.surname"
                 remove:
-                  - name: name
-                  - name: surname
+                  - name
+                  - surname
               response:
                 add:
                   - name: createdBy
