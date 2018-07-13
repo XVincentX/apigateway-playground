@@ -30,7 +30,7 @@ pipelines:
       - jwt:
         - action:
             checkCredentialExistence: false
-            secretOrPublicKeyFile: "/var/lib/eg/config/expressgateway.pem"
+            secretOrPublicKeyFile: "/var/lib/eg/expressgateway.pem"
             audience: 'https://api.apitest.lan'
       - jwtScopes:
         - action:

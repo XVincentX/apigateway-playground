@@ -11,11 +11,14 @@ spec:
     app: gateway
   type: ClusterIP
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway
 spec:
+  selector:
+    matchLabels:
+      app: gateway
   replicas: 1
   template:
     metadata:
