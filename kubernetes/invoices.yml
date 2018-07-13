@@ -27,4 +27,4 @@ spec:
     spec:
       containers:
       - name: invoices
-        image: xvincentx/apigatewayplayground_invoices:microservice-gateway-hypermedia
+        image: xvincentx/apigatewayplayground_invoices:monolith-hypermedia

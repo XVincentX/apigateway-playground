@@ -6,10 +6,10 @@ const plugin = {
       app.get('/apiroot', (req, res) => res.json({
         url: '/',
         actions: [
-          { url: 'http://customers.apitest.lan/', value: 'listCustomer' },
-          { url: 'http://customers.apitest.lan/', value: 'createCustomer' },
-          { url: 'http://invoices.apitest.lan/{customerId}/invoices/', value: 'listInvoice' },
-          { url: 'http://invoices.apitest.lan/{customerId}/invoices/', value: 'createInvoice' },
+          { url: 'http://api.apitest.lan/customers', value: 'listCustomer' },
+          { url: 'http://api.apitest.lan/customers', value: 'createCustomer' },
+          { url: 'http://api.apitest.lan/invoices/{customerId}/', value: 'listInvoice' },
+          { url: 'http://api.apitest.lan/invoices/{customerId}/', value: 'createInvoice' },
         ]
       }));
     });
