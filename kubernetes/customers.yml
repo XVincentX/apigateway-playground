@@ -11,11 +11,14 @@ spec:
     app: customers
   type: ClusterIP
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: customers
 spec:
+  selector:
+    matchLabels:
+      app: customers
   replicas: 1
   template:
     metadata:
