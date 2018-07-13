@@ -2,7 +2,7 @@ const Client = require('kubernetes-client').Client
 const config = require('kubernetes-client').config;
 const JSONStream = require('JSONStream');
 
-const client = new Client({ config: config.getInCluster(), version: '1.9' });
+const client = new Client({ config: config.getInCluster(), version: '1.10' });
 
 const avaiableActions = {
   customers: [
