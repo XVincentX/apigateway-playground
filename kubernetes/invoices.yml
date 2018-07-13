@@ -11,11 +11,14 @@ spec:
     app: invoices
   type: ClusterIP
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: invoices
 spec:
+  selector:
+    matchLabels:
+      app: invoices
   replicas: 1
   template:
     metadata:
