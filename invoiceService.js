@@ -14,32 +14,9 @@ const Invoice = mongoose.model('invoices', {
 
 const app = express();
 
-const checkRole = (roleType) => {
-  const roleMap = {
-    admin: 2,
-    user: 1,
-    anonymous: 0
-  }
-
-  return (req, res, next) => {
-    if (req.user.role < roleMap[roleType])
-      return res.status(401).send();
-    next();
-  }
-}
-
-app.use(apikey(function (key, next) {
-  if (key === "adminKey")
-    return next(null, { role: 2 })
-  else if (key === "userKey")
-    return next(null, { role: 1 })
-  return next(null, { role: 0 });
-}));
-
-
 app.use(bodyParser.json());
 
-app.get('/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
+app.get('/:customerId/invoices/:invoiceId?', (req, res) => {
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
 
@@ -54,7 +31,7 @@ app.get('/:customerId/invoices/:invoiceId?', checkRole('user'), (req, res) => {
       (err) => res.status(500).send(err));
 });
 
-app.post('/:customerId/invoices/', checkRole('admin'), (req, res) => {
+app.post('/:customerId/invoices/', (req, res) => {
 
   if (!req.params.customerId)
     return res.status(400).send("CustomerID hasn't been provided");
