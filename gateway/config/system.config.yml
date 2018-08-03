@@ -10,11 +10,11 @@ crypto:
   saltRounds: 10
 
 plugins:
-  apiroot:
-    package: '/data/apiroot.js'
-  jwtScopes:
-    package: '/data/jwtScopes.js'
   express-gateway-plugin-body-modifier-example:
+   apiroot:
+    package: '/app/apiroot.js'
+   jwtScopes:
+    package: '/app/jwtScopes.js'
 
 # OAuth2 Settings
 session:
