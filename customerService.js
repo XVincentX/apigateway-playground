@@ -22,7 +22,11 @@ app.get('/:id?', (req, res) => {
 
   Customer.find(query).lean()
     .then(
-      (customers) => res.json(customers),
+      (customers) => res.json(customers.map((customer) => ({
+        ...customer,
+        invoices_url: `http://invoices.apitest.lan/${customer._id}/invoices`,
+        url: `http://customers.apitest.lan/${customer._id}`
+      }))),
       (err) => res.status(500).send(err));
 });
 
