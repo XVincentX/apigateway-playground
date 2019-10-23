@@ -21,7 +21,7 @@
     "express": "^4.16.3",
     "inquirer": "^6.0.0",
     "lodash.pick": "^4.4.0",
-    "mongoose": "^5.2.3",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.18.1"
   }
 }
