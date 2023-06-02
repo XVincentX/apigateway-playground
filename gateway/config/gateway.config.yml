@@ -1,0 +1,49 @@
+http:
+  port: 8080
+apiEndpoints:
+  userspace:
+    host: '*'
+    methods: GET
+    scopes:
+      - 'read'
+  adminspace:
+    host: '*'
+    methods: POST
+    scopes:
+      - 'write'
+serviceEndpoints:
+  customers:
+    url: 'http://customers:3000/'
+  invoices:
+    url: 'http://invoices:3000/'
+policies:
+  - expression
+  - jwt
+  - jwtScopes
+  - proxy
+pipelines:
+  - name: default
+    apiEndpoints:
+      - userspace
+      - adminspace
+    policies:
+      - jwt:
+        - action:
+            checkCredentialExistence: false
+            secretOrPublicKeyFile: "/var/lib/eg/expressgateway.pem"
+            audience: 'https://api.apitest.lan'
+      - jwtScopes:
+        - action:
+      - proxy:
+          - action:
+              serviceEndpoint: customers
+              changeOrigin: true
+            condition:
+              name: hostMatch
+              pattern: 'customers.apitest.lan*'
+          - action:
+              serviceEndpoint: invoices
+              changeOrigin: true
+            condition:
+              name: hostMatch
+              pattern: 'invoices.apitest.lan*'

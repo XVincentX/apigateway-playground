@@ -4,5 +4,5 @@ metadata:
   name: ingress
 spec:
   backend:
-    serviceName: customers
-    servicePort: 3000
+    serviceName: gateway
+    servicePort: 8080

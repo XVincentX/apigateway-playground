@@ -1,0 +1,28 @@
+# Core
+db:
+  redis:
+    emulate: true
+    namespace: EG
+
+crypto:
+  cipherKey: sensitiveKey
+  algorithm: aes256
+  saltRounds: 10
+
+plugins:
+   apiroot:
+    package: '/app/apiroot.js'
+   jwtScopes:
+    package: '/app/jwtScopes.js'
+
+# OAuth2 Settings
+session:
+  secret: keyboard cat
+  resave: false
+  saveUninitialized: false
+accessTokens:
+  timeToExpiry: 7200000
+refreshTokens:
+  timeToExpiry: 7200000
+authorizationCodes:
+  timeToExpiry: 300000

@@ -1,30 +1,30 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: customers
+  name: gateway
 spec:
   ports:
     - name: http
-      port: 3000
-      targetPort: 3000
+      port: 8080
+      targetPort: 8080
   selector:
-    app: customers
+    app: gateway
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customers
+  name: gateway
 spec:
   selector:
     matchLabels:
-      app: customers
+      app: gateway
   replicas: 1
   template:
     metadata:
       labels:
-        app: customers
+        app: gateway
     spec:
       containers:
-      - name: customers
-        image: xvincentx/apigatewayplayground_customers:microservice-gateway-hypermedia
+      - name: gateway
+        image: xvincentx/apigatewayplayground_gateway:microservice-gateway-hypermedia
